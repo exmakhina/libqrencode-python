@@ -28,7 +28,7 @@ import optparse
 import os
 import sys
 
-from _qrencode import *
+from ._qrencode import *
 
 
 class Error(Exception):
@@ -137,7 +137,7 @@ class QREncoder(object):
                 self.code = call(QRcode_encodeDataMQR, length, cdata, 
                                     self.version, self.level)
             else:
-	        self.code = call(QRcode_encodeStringMQR, cdata, self.version, 
+                self.code = call(QRcode_encodeStringMQR, cdata, self.version, 
                                     self.level, self.hint, self.casesensitive)
         else:
             if self.eightbit:
@@ -306,7 +306,7 @@ class StructuredQREncoder(QREncoder):
                 self.code_list = call(QRcode_encodeDataStructured, length, 
                                         cdata, self.version, self.level)
             else:
-	        self.code_list = call(QRcode_encodeStringStructured, cdata, 
+                self.code_list = call(QRcode_encodeStringStructured, cdata, 
                                         self.version, self.level, self.hint,
                                         self.casesensitive)
     def as2dlists(self):
@@ -436,7 +436,7 @@ def main(argv):
     else:
         try:
             from PIL import Image
-        except Exception, e:
+        except Exception as e:
             e = 'Cannot write image %s, %s' % (options.filename, str(e))
             print >> sys.stderr, e
         def saveimage(filename, qr):
